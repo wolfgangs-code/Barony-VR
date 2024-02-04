@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 project(barony)
 
+# Barony VR edits on 131
+
+
 if (NOT CMAKE_BUILD_TYPE)
 	set (CMAKE_BUILD_TYPE Release)
 endif(NOT CMAKE_BUILD_TYPE)
@@ -124,6 +127,13 @@ if(FMOD_ENABLED AND OPENAL_ENABLED)
 endif()
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
+
+#!  Barony VR
+find_package(OpenVR REQUIRED)
+if (OpenVR_FOUND)
+  include_directories(${OpenVR_INCLUDE_DIR})
+  link_directories(${OPENVR_LIBRARIES})
+endif()
 
 set(CMAKE_OSX_ARCHITECTURES x86_64)
 
@@ -366,7 +376,7 @@ endif()
 #file(GLOB_RECURSE SOUND_FILES sound/*)
 
 #add_subdirectory(books)
- 
+
 configure_file ( "${PROJECT_SOURCE_DIR}/src/Config.hpp.in" "${PROJECT_SOURCE_DIR}/src/Config.hpp")
 
 message("***************************")
